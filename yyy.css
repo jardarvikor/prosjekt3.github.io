@@ -147,8 +147,8 @@ main {
       border: 2px black solid;
     }
     .datamodell:hover{
-      width: 700px;
-      height: 400px;
+      width: 800px;
+      height: 450px;
       margin-bottom: 20px;
       z-index: 1;
     }
