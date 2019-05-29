@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>SuperChat</title>
+    <link rel="stylesheet" href="yyy.css">
+    <script src="nav.js"></script>
+
+  </head>
+  <body>
+    <header>
+      <article class="header-ani-container">
+        <img src="bilder/jjang.png" alt="">
+      </article>
+
+      <h1>IT prosjekt</h1>
+
+
+      <img class="dropdown-button" src="bilder/dotdotdot.png" alt="">
+      <section class="dropdown-container">
+        <a href="index.html">home</a>
+        <a href="side2">kap 9.2</a>
+        <a href="side3.html">kap 9.3</a>
+        <a href="fierbase.html">chatservice</a>
+        <a href="side4.html">Planlegging</a>
+      </section>
+     </header>
+
+    <main>
+      <section class="ark">
+        <h1>Snakk med ein it-teknikker</h1>
+        <form id="skjema" >
+           <input type="text" id="inpSendar" required placeholder="kem er du">
+           <input type="text" id="inpMeining" required placeholder="kva seie du">
+           <button type="button" type="submit" id="button">OK</button>
+
+        </form>
+        <article id="txtMeldingar"></article>
+
+        <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase.js"></script>
+        <script>
+          // Initialize Firebase
+          var config = {
+            apiKey: "AIzaSyB2PaeockU5j0iYwHgdIhdFiSHh9WceMog",
+            authDomain: "awesome-7c2ad.firebaseapp.com",
+            databaseURL: "https://awesome-7c2ad.firebaseio.com",
+            projectId: "awesome-7c2ad",
+            storageBucket: "awesome-7c2ad.appspot.com",
+            messagingSenderId: "721475855522"
+          };
+          firebase.initializeApp(config);
+          </script>
+
+        <script>
+          let database = firebase.database();
+          let meldingar = database.ref("meldingar");
+          let skjema = document.getElementById("skjema");
+          let inpSendar = document.getElementById("inpSendar");
+          let inpMeining = document.getElementById("inpMeining");
+          let txtMeldingar = document.getElementById("txtMeldingar");
+
+          function visMelding(snapshot) {
+            let melding = snapshot.val();
+            var sndr = melding.sendar;
+            var tkst = melding.tekst;
+            let meldingTekst = document.createElement('b');
+            var node1 = document.createTextNode(sndr + ": ");
+            meldingTekst.appendChild(node1);
+            var node = document.createTextNode(tkst);
+            var paste = document.createElement('p');
+            paste.appendChild(meldingTekst);
+            paste.appendChild(node);
+            txtMeldingar.appendChild(paste);
+          }
+
+          function regNyMelding(evt){
+            evt.preventDefault();
+            var nyMelding ={
+              sendar:inpSendar.value,
+              tekst:inpMeining.value
+            };
+            meldingar.push(nyMelding);
+            inpMeining.value="";
+          }
+          meldingar.on("child_added", visMelding);
+          document.getElementById('button').onclick = regNyMelding;
+
+          </script>
+          <h2 style="margin-top: 30px; margin-bottom:10px;">datamodell</h2>
+          <p>her er eit eksempel på korleis ein datamoell fungerer. det står tekst til bildene som viser forholdet mellom skrankene<br>
+          dra musa på bildet for å forstørre bildet.</p>
+          <img class="datamodell" src="bilder/datamodell.png" style=""alt="">
+      </section>
+    </main>
+  </body>
+</html>
