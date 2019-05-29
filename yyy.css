@@ -47,6 +47,7 @@ main {
       width: 100vw;
       display: flex;
       flex-direction: row;
+      z-index: 2;
 
 
     }
@@ -146,9 +147,10 @@ main {
       border: 2px black solid;
     }
     .datamodell:hover{
-      width: 400px;
+      width: 700px;
       height: 400px;
       margin-bottom: 20px;
+      z-index: 1;
     }
     #paint{
       margin: 40px auto;
@@ -174,4 +176,5 @@ main {
 
     #side1{background-image: url(paint/side1.png);}
     #side2{background-image: url(paint/side2.png)}
+    #side3{background-image: url(paint/side3.png)}
     #database{background-image: url(paint/database.png)}
